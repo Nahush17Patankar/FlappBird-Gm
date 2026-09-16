@@ -108,8 +108,25 @@ export class GameRenderer {
     }
 
     if (bgImg && bgImg.complete && bgImg.naturalWidth > 0) {
-      // User directive: Background remains in stationary / stop position at all times (no parallax/scrolling)
-      ctx.drawImage(bgImg, 0, 0, width, height);
+      // Aspect-ratio preserving cover calculation (center-crop, no stretching)
+      const imgRatio = bgImg.naturalWidth / bgImg.naturalHeight;
+      const targetRatio = width / height;
+      let drawW = width;
+      let drawH = height;
+      let drawX = 0;
+      let drawY = 0;
+
+      if (targetRatio > imgRatio) {
+        drawW = width;
+        drawH = width / imgRatio;
+        drawY = (height - drawH) / 2;
+      } else {
+        drawH = height;
+        drawW = height * imgRatio;
+        drawX = (width - drawW) / 2;
+      }
+
+      ctx.drawImage(bgImg, drawX, drawY, drawW, drawH);
 
       // Atmospheric gradient tint overlay (kept subtle so the beautiful realm artwork shines through)
       const gradient = ctx.createLinearGradient(0, 0, 0, height);

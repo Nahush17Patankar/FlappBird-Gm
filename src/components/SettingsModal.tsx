@@ -23,14 +23,28 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
+  const activeTheme = THEMES[settings.themeId] || THEMES.celestial;
+
   return (
     <div
       id="settings-modal-overlay"
-      className="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-40 animate-in fade-in duration-150"
+      className="fixed inset-0 flex items-center justify-center p-3 sm:p-4 z-40 animate-in fade-in duration-150 overflow-hidden"
     >
+      {/* Responsive Theme Background filling the entire mobile viewport */}
+      <div
+        id="settings-background-backdrop"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat -z-10 transition-[background-image] duration-300 pointer-events-none"
+        style={{
+          backgroundImage: `url(${activeTheme.bgImage})`,
+        }}
+      >
+        {/* Atmospheric tint overlay ensuring theme artwork is visible while text remains perfectly legible */}
+        <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-md" />
+      </div>
+
       <div
         id="settings-dialog"
-        className="w-full max-w-md max-h-[90vh] overflow-y-auto bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl text-slate-100 flex flex-col gap-5"
+        className="relative w-full max-w-md max-h-[90vh] overflow-y-auto bg-slate-900/90 backdrop-blur-xl border border-slate-800/90 rounded-2xl p-4 sm:p-5 shadow-2xl text-slate-100 flex flex-col gap-4 sm:gap-5"
       >
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -239,11 +253,13 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           </button>
 
           <button
+            id="btn-save-settings"
             type="button"
             onClick={onClose}
-            className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs tracking-wide transition-all cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-extrabold text-xs sm:text-sm tracking-wide shadow-lg shadow-cyan-500/25 active:scale-95 transition-all cursor-pointer flex items-center gap-1.5"
           >
-            Apply & Close
+            <Check className="w-4 h-4 stroke-[3]" />
+            <span>Save Changes</span>
           </button>
         </div>
       </div>

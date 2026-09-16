@@ -189,10 +189,10 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
         }
 
         if (gameState === 'idle') {
-          // Idle floating bird animation
+          // Idle floating bird animation - centered gracefully in the upper sky above the title
           const bird = birdRef.current;
-          bird.y = 290 + Math.sin(gameTimeRef.current * 3.2) * 10;
-          bird.rotation = Math.sin(gameTimeRef.current * 3.2) * 0.1;
+          bird.y = 195 + Math.sin(gameTimeRef.current * 3.2) * 8;
+          bird.rotation = Math.sin(gameTimeRef.current * 3.2) * 0.08;
           bird.wingPhase += 7 * frameTime;
           bird.squish += (1 - bird.squish) * (frameTime * 6);
 
@@ -325,12 +325,12 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
         e.preventDefault();
         handleFlap();
       }}
-      className="relative w-full h-full flex items-center justify-center overflow-hidden select-none cursor-pointer bg-slate-950 touch-none"
+      className="relative w-full h-full flex items-center justify-center overflow-hidden select-none cursor-pointer bg-transparent touch-none"
     >
       <canvas
         ref={canvasRef}
         id="game-canvas"
-        className="w-full h-full max-w-[480px] max-h-[820px] aspect-[440/720] shadow-2xl shadow-indigo-950/60 object-contain sm:rounded-2xl sm:border sm:border-slate-800/60"
+        className="w-full h-full object-cover sm:max-w-[480px] sm:max-h-[820px] sm:aspect-[440/720] sm:object-contain sm:rounded-2xl sm:border sm:border-slate-800/60 shadow-2xl shadow-indigo-950/60"
       />
     </div>
   );

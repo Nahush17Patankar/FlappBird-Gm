@@ -7,6 +7,7 @@ import { SettingsModal } from './components/SettingsModal';
 import { AboutModal } from './components/AboutModal';
 import { CountdownOverlay } from './components/CountdownOverlay';
 import { GameMode, GameSettings, GameState, GameStats, ThemeId, BirdSkinId } from './types';
+import { THEMES } from './constants';
 import { sound } from './audio';
 import { Play } from 'lucide-react';
 
@@ -143,14 +144,30 @@ export default function App() {
   };
 
   const isNewBestScore = stats.score >= stats.bestScore && stats.score > 0;
+  const currentTheme = THEMES[settings.themeId] || THEMES.celestial;
 
   return (
     <main className="relative w-screen h-screen overflow-hidden bg-slate-950 flex items-center justify-center font-sans antialiased text-slate-100">
       {/* Outer ambient gradient glow */}
       <div className="absolute inset-0 bg-radial from-slate-900/60 via-slate-950/90 to-slate-950 pointer-events-none" />
 
-      {/* Main Game Card Shell */}
-      <div className="relative w-full h-full max-w-[480px] max-h-[800px] sm:h-[94vh] sm:rounded-3xl sm:border sm:border-slate-800/80 shadow-2xl shadow-indigo-950/50 flex flex-col items-center justify-center overflow-hidden bg-slate-950">
+      {/* Main Game Card Shell - Fully responsive on mobile (filling viewport), beautifully framed on desktop */}
+      <div
+        id="main-game-card-shell"
+        className="relative w-full h-full max-w-none max-h-none sm:max-w-[480px] sm:max-h-[820px] sm:h-[94vh] sm:rounded-3xl sm:border sm:border-slate-800/80 shadow-2xl shadow-indigo-950/50 flex flex-col items-center justify-center overflow-hidden bg-slate-950"
+      >
+        {/* Responsive Theme Background Layer for Viewport & Menu */}
+        <div
+          id="app-theme-background"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none transition-[background-image] duration-300"
+          style={{
+            backgroundImage: `url(${currentTheme.bgImage})`,
+          }}
+        >
+          {/* Atmospheric gradient overlay for optimal UI legibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/25 via-transparent to-slate-950/55" />
+        </div>
+
         {/* Game Canvas Container */}
         <GameCanvas
           gameState={gameState}
