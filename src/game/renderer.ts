@@ -26,12 +26,21 @@ export class GameRenderer {
 
   private preloadBackgrounds() {
     Object.values(THEMES).forEach((theme) => {
-      const img = new Image();
-      img.src = theme.bgImage;
-      img.onload = () => {
-        this.bgImages.set(theme.id, img);
-      };
+      this.ensureBackgroundImage(theme.id, theme.bgImage);
     });
+  }
+
+  private ensureBackgroundImage(themeId: string, bgImageSrc: string): HTMLImageElement | undefined {
+    let img = this.bgImages.get(themeId);
+    if (!img) {
+      img = new Image();
+      img.src = bgImageSrc;
+      img.onload = () => {
+        this.bgImages.set(themeId, img!);
+      };
+      this.bgImages.set(themeId, img);
+    }
+    return img;
   }
 
   public render(
@@ -56,7 +65,7 @@ export class GameRenderer {
     // Screen shake
     ctx.translate(shakeOffsetX, shakeOffsetY);
 
-    // 1. Clear & Background
+    // 1. Clear & Background (Static, stationary)
     this.drawBackground(ctx, theme, distanceTraveled, gameTime, width, height);
 
     // 2. Ambient floating dust / stars
@@ -88,35 +97,42 @@ export class GameRenderer {
   private drawBackground(
     ctx: CanvasRenderingContext2D,
     theme: typeof THEMES.celestial,
-    distanceTraveled: number,
+    _distanceTraveled: number,
     gameTime: number,
     width: number,
     height: number
   ) {
-    const bgImg = this.bgImages.get(theme.id);
+    let bgImg = this.bgImages.get(theme.id);
+    if (!bgImg) {
+      bgImg = this.ensureBackgroundImage(theme.id, theme.bgImage);
+    }
+
     if (bgImg && bgImg.complete && bgImg.naturalWidth > 0) {
-      // Parallax scroll with smooth pixel-aligned wrap-around
-      const parallaxSpeed = 0.15;
-      const scrollX = Math.floor((distanceTraveled * parallaxSpeed) % width);
+      // User directive: Background remains in stationary / stop position at all times (no parallax/scrolling)
+      ctx.drawImage(bgImg, 0, 0, width, height);
 
-      // Draw two slices for infinite scroll with +1px overlap to prevent subpixel seams
-      ctx.drawImage(bgImg, -scrollX, 0, width + 1, height);
-      ctx.drawImage(bgImg, width - scrollX - 1, 0, width + 1, height);
-
-      // Atmospheric gradient tint overlay
+      // Atmospheric gradient tint overlay (kept subtle so the beautiful realm artwork shines through)
       const gradient = ctx.createLinearGradient(0, 0, 0, height);
       if (theme.id === 'celestial') {
-        gradient.addColorStop(0, 'rgba(15, 23, 42, 0.4)');
-        gradient.addColorStop(0.5, 'rgba(88, 28, 135, 0.2)');
-        gradient.addColorStop(1, 'rgba(15, 23, 42, 0.7)');
+        gradient.addColorStop(0, 'rgba(15, 23, 42, 0.08)');
+        gradient.addColorStop(0.6, 'rgba(6, 78, 59, 0.05)');
+        gradient.addColorStop(1, 'rgba(6, 78, 59, 0.25)');
       } else if (theme.id === 'cyber') {
         gradient.addColorStop(0, 'rgba(15, 7, 30, 0.4)');
         gradient.addColorStop(0.6, 'rgba(236, 72, 153, 0.15)');
         gradient.addColorStop(1, 'rgba(9, 9, 11, 0.75)');
+      } else if (theme.id === 'jungle') {
+        gradient.addColorStop(0, 'rgba(6, 78, 59, 0.15)');
+        gradient.addColorStop(0.7, 'rgba(2, 44, 34, 0.1)');
+        gradient.addColorStop(1, 'rgba(6, 78, 59, 0.35)');
+      } else if (theme.id === 'desert') {
+        gradient.addColorStop(0, 'rgba(14, 165, 233, 0.06)');
+        gradient.addColorStop(0.7, 'rgba(120, 53, 15, 0.05)');
+        gradient.addColorStop(1, 'rgba(69, 26, 3, 0.25)');
       } else {
-        gradient.addColorStop(0, 'rgba(28, 25, 23, 0.3)');
-        gradient.addColorStop(0.5, 'rgba(245, 158, 11, 0.15)');
-        gradient.addColorStop(1, 'rgba(28, 25, 23, 0.7)');
+        gradient.addColorStop(0, 'rgba(15, 23, 42, 0.05)');
+        gradient.addColorStop(0.6, 'rgba(20, 83, 45, 0.05)');
+        gradient.addColorStop(1, 'rgba(20, 83, 45, 0.25)');
       }
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);

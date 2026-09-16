@@ -330,7 +330,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
       <canvas
         ref={canvasRef}
         id="game-canvas"
-        className="w-full h-full max-w-[440px] max-h-[720px] aspect-[440/720] shadow-2xl shadow-indigo-950/60 object-contain rounded-xl sm:rounded-2xl border border-slate-800/60"
+        className="w-full h-full max-w-[480px] max-h-[820px] aspect-[440/720] shadow-2xl shadow-indigo-950/60 object-contain sm:rounded-2xl sm:border sm:border-slate-800/60"
       />
     </div>
   );

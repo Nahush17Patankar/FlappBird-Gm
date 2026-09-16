@@ -1,6 +1,6 @@
 export type GameMode = 'classic' | 'zen' | 'hardcore';
 
-export type ThemeId = 'celestial' | 'cyber' | 'sunset';
+export type ThemeId = 'celestial' | 'cyber' | 'sunset' | 'jungle' | 'desert';
 
 export type BirdSkinId = 'astral' | 'cyber_falcon' | 'solar_phoenix' | 'void_raven';
 

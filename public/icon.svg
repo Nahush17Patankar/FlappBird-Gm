@@ -1,77 +1,176 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
+    <!-- Background Gradient: Deep rich space cosmic nebula -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#090d16" />
-      <stop offset="50%" stop-color="#0f172a" />
-      <stop offset="100%" stop-color="#1e1b4b" />
+      <stop offset="0%" stop-color="#0b0f19" />
+      <stop offset="40%" stop-color="#111827" />
+      <stop offset="80%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#2e1065" />
     </linearGradient>
-    <linearGradient id="birdGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="30%" stop-color="#38bdf8" />
-      <stop offset="70%" stop-color="#818cf8" />
-      <stop offset="100%" stop-color="#4f46e5" />
-    </linearGradient>
-    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#a855f7" />
-      <stop offset="60%" stop-color="#ec4899" />
+
+    <!-- Neon Rim Gradient -->
+    <linearGradient id="rimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
       <stop offset="100%" stop-color="#f43f5e" />
     </linearGradient>
-    <radialGradient id="auraGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.4" />
-      <stop offset="70%" stop-color="#818cf8" stop-opacity="0.1" />
-      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
-    </radialGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="12" result="blur" />
+
+    <!-- Bird Body: Luminescent Astral Cyan & Violet -->
+    <linearGradient id="birdGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="25%" stop-color="#67e8f9" />
+      <stop offset="60%" stop-color="#38bdf8" />
+      <stop offset="85%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4338ca" />
+    </linearGradient>
+
+    <!-- Wing Gradient: Vibrant Sunset Nebula (Magenta to Electric Orange) -->
+    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f472b6" />
+      <stop offset="45%" stop-color="#ec4899" />
+      <stop offset="80%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+
+    <!-- Crystal Pipe Spire Gradient -->
+    <linearGradient id="crystalSpire" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.9" />
+      <stop offset="35%" stop-color="#22d3ee" stop-opacity="0.95" />
+      <stop offset="70%" stop-color="#0284c7" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0369a1" stop-opacity="0.8" />
+    </linearGradient>
+
+    <!-- Crystal Cap Gradient -->
+    <linearGradient id="crystalCap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#a5f3fc" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+
+    <!-- Cosmic Glow Filter -->
+    <filter id="superGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="blur1" />
+      <feGaussianBlur stdDeviation="6" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur1" />
+        <feMergeNode in="blur2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Soft Ambient Halo Filter -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
+
+    <!-- Radial Aura -->
+    <radialGradient id="centerAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.45" />
+      <stop offset="45%" stop-color="#818cf8" stop-opacity="0.25" />
+      <stop offset="75%" stop-color="#ec4899" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#090d16" stop-opacity="0" />
+    </radialGradient>
   </defs>
 
-  <!-- Background Canvas -->
-  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
-  <circle cx="256" cy="256" r="210" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.25" stroke-dasharray="8 12" />
+  <!-- Squircle App Icon Base -->
+  <rect width="512" height="512" rx="116" fill="url(#bgGrad)" />
 
-  <!-- Ambient Glow -->
-  <circle cx="256" cy="256" r="180" fill="url(#auraGlow)" />
+  <!-- Outer Neon Concentric Ring -->
+  <rect x="12" y="12" width="488" height="488" rx="104" fill="none" stroke="url(#rimGrad)" stroke-width="3" stroke-opacity="0.4" />
 
-  <!-- Crystal Spires in Background -->
-  <polygon points="120,440 145,280 170,440" fill="#1e293b" opacity="0.6" />
-  <polygon points="360,440 385,260 410,440" fill="#1e293b" opacity="0.6" />
+  <!-- Background Ambient Nebula Aura -->
+  <circle cx="260" cy="250" r="210" fill="url(#centerAura)" />
 
-  <!-- Glowing Flight Trail -->
-  <circle cx="160" cy="290" r="14" fill="#38bdf8" opacity="0.3" filter="url(#glow)" />
-  <circle cx="190" cy="275" r="18" fill="#818cf8" opacity="0.5" filter="url(#glow)" />
+  <!-- Celestial Constellation Stars -->
+  <circle cx="100" cy="90" r="2.5" fill="#ffffff" opacity="0.8" />
+  <circle cx="150" cy="130" r="1.5" fill="#38bdf8" opacity="0.9" />
+  <circle cx="390" cy="80" r="3" fill="#ffffff" opacity="0.9" />
+  <circle cx="430" cy="140" r="2" fill="#f472b6" opacity="0.8" />
+  <circle cx="90" cy="380" r="2.5" fill="#38bdf8" opacity="0.7" />
+  <circle cx="420" cy="390" r="2" fill="#ffffff" opacity="0.8" />
 
-  <!-- Bird Body -->
-  <g transform="translate(240, 245) rotate(-8)">
-    <!-- Back Wing -->
-    <path d="M -30 -10 C -70 -70 -20 -90 10 -40 Z" fill="url(#wingGrad)" opacity="0.8" />
-
-    <!-- Main Body -->
-    <ellipse cx="10" cy="10" rx="75" ry="55" fill="url(#birdGrad)" filter="url(#glow)" />
-
-    <!-- Belly Highlight -->
-    <ellipse cx="-5" cy="25" rx="40" ry="20" fill="#ffffff" opacity="0.35" />
-
-    <!-- Front Wing -->
-    <path d="M -10 15 C -60 75 10 90 25 35 Z" fill="url(#wingGrad)" />
-
-    <!-- Head Crest / Halo -->
-    <path d="M 40 -35 Q 65 -55 80 -40 Q 65 -25 50 -20 Z" fill="#facc15" />
-
-    <!-- Beak -->
-    <polygon points="75,-5 125,12 72,26" fill="#f59e0b" />
-    <polygon points="75,3 125,12 72,16" fill="#fbbf24" />
-
-    <!-- Eye Outer -->
-    <circle cx="52" cy="-10" r="14" fill="#ffffff" />
-    <!-- Pupil -->
-    <circle cx="56" cy="-10" r="7" fill="#0f172a" />
-    <!-- Glint -->
-    <circle cx="59" cy="-13" r="3" fill="#ffffff" />
+  <!-- Iconic Ethereal Crystal Obstacles (Stylized Flappy Spire Pipes) -->
+  <!-- Bottom Crystal Spire -->
+  <g opacity="0.85">
+    <polygon points="350,512 350,330 380,310 410,330 410,512" fill="url(#crystalSpire)" />
+    <!-- Cap Rim -->
+    <rect x="340" y="324" width="80" height="14" rx="4" fill="url(#crystalCap)" filter="url(#softGlow)" />
+    <!-- Inner Spire Light Ray -->
+    <line x1="380" y1="315" x2="380" y2="512" stroke="#ffffff" stroke-width="2" opacity="0.6" />
   </g>
 
-  <!-- Floating Sparkles -->
-  <polygon points="390,140 395,155 410,160 395,165 390,180 385,165 370,160 385,155" fill="#38bdf8" />
-  <polygon points="120,160 123,170 133,173 123,176 120,186 117,176 107,173 117,170" fill="#ec4899" />
+  <!-- Top Crystal Spire -->
+  <g opacity="0.75">
+    <polygon points="355,0 355,140 380,160 405,140 405,0" fill="url(#crystalSpire)" />
+    <!-- Cap Rim -->
+    <rect x="345" y="132" width="70" height="14" rx="4" fill="url(#crystalCap)" filter="url(#softGlow)" />
+  </g>
+
+  <!-- Starlight Speed Trails / Magic Particle Ribbons -->
+  <path d="M 80,310 Q 150,290 220,270" fill="none" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" opacity="0.5" filter="url(#superGlow)" />
+  <path d="M 60,285 Q 130,270 200,250" fill="none" stroke="#ec4899" stroke-width="4" stroke-linecap="round" opacity="0.6" filter="url(#superGlow)" />
+  <path d="M 110,330 Q 170,310 230,285" fill="none" stroke="#818cf8" stroke-width="3" stroke-linecap="round" opacity="0.4" />
+
+  <!-- Glowing Starlight Floating Gem -->
+  <g transform="translate(380, 235)">
+    <polygon points="0,-16 14,0 0,16 -14,0" fill="#facc15" filter="url(#superGlow)" />
+    <polygon points="0,-11 9,0 0,11 -9,0" fill="#fef08a" />
+  </g>
+
+  <!-- MAIN CHARACTER: Dynamic High-Energy Flappy Astral Bird -->
+  <g transform="translate(225, 235) rotate(-10)">
+    <!-- Back Wing (Flapping High with Gradient & Glow) -->
+    <path d="M -30 -15 C -85 -85 -30 -115 15 -50 Q -5 -25 -30 -15 Z" fill="url(#wingGrad)" filter="url(#superGlow)" opacity="0.9" />
+
+    <!-- Outer Bird Aura Glow -->
+    <ellipse cx="15" cy="15" rx="80" ry="60" fill="#38bdf8" opacity="0.3" filter="url(#superGlow)" />
+
+    <!-- Main Bird Body -->
+    <ellipse cx="15" cy="15" rx="78" ry="58" fill="url(#birdGrad)" />
+
+    <!-- Underbelly Soft Shading / Highlight -->
+    <path d="M -40,25 C -10,65 50,60 75,25 C 50,45 -10,50 -40,25 Z" fill="#ffffff" opacity="0.4" />
+
+    <!-- Front Wing (Dynamic Upstroke Curve) -->
+    <path d="M -15 10 C -75 90 5 110 35 45 Q 10 25 -15 10 Z" fill="url(#wingGrad)" filter="url(#softGlow)" />
+    <!-- Wing Feathers Highlight -->
+    <path d="M -10 18 C -50 75 0 85 22 42" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.6" />
+
+    <!-- Golden Crown / Halo Crest Feather -->
+    <path d="M 45 -40 Q 80 -65 95 -45 Q 75 -30 55 -25 Z" fill="#fde047" filter="url(#softGlow)" />
+    <polygon points="85,-55 89,-47 97,-47 90,-41 93,-33 85,-38 77,-33 80,-41 73,-47 81,-47" fill="#ffffff" />
+
+    <!-- Large Expressive Hero Eye Outer -->
+    <ellipse cx="58" cy="-10" rx="19" ry="20" fill="#ffffff" filter="url(#softGlow)" />
+    <!-- Eye Iris (Electric Violet-Blue) -->
+    <circle cx="63" cy="-10" r="11" fill="#1e1b4b" />
+    <circle cx="63" cy="-10" r="9" fill="#0284c7" />
+    <circle cx="64" cy="-10" r="6" fill="#0f172a" />
+    <!-- Catchlights / Glistening Sparkles in Eye -->
+    <circle cx="67" cy="-14" r="3.5" fill="#ffffff" />
+    <circle cx="60" cy="-6" r="1.5" fill="#ffffff" />
+
+    <!-- Dynamic Curved Golden Beak -->
+    <!-- Top Beak -->
+    <path d="M 80,-8 Q 135,10 82,18 Z" fill="#f59e0b" filter="url(#softGlow)" />
+    <!-- Top Beak Highlight -->
+    <path d="M 82,-3 Q 120,10 84,12 Z" fill="#fbbf24" />
+    <!-- Bottom Beak -->
+    <path d="M 80,18 Q 115,22 82,30 Z" fill="#d97706" />
+
+    <!-- Cheerful Cheek Blush -->
+    <ellipse cx="46" cy="18" rx="9" ry="6" fill="#f43f5e" opacity="0.6" filter="url(#softGlow)" />
+  </g>
+
+  <!-- Foreground Magic Sparkles -->
+  <g transform="translate(130, 140)">
+    <polygon points="0,-12 3,-3 12,0 3,3 0,12 -3,3 -12,0 -3,-3" fill="#ffffff" filter="url(#superGlow)" />
+  </g>
+  <g transform="translate(420, 120)">
+    <polygon points="0,-16 4,-4 16,0 4,4 0,16 -4,4 -16,0 -4,-4" fill="#38bdf8" filter="url(#superGlow)" />
+  </g>
+  <g transform="translate(280, 410)">
+    <polygon points="0,-10 2.5,-2.5 10,0 2.5,2.5 0,10 -2.5,2.5 -10,0 -2.5,-2.5" fill="#f472b6" filter="url(#superGlow)" />
+  </g>
 </svg>

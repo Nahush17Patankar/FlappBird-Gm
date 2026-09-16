@@ -4,6 +4,7 @@ import { GameHUD } from './components/GameHUD';
 import { StartScreenOverlay } from './components/StartScreenOverlay';
 import { GameOverModal } from './components/GameOverModal';
 import { SettingsModal } from './components/SettingsModal';
+import { AboutModal } from './components/AboutModal';
 import { CountdownOverlay } from './components/CountdownOverlay';
 import { GameMode, GameSettings, GameState, GameStats, ThemeId, BirdSkinId } from './types';
 import { sound } from './audio';
@@ -33,6 +34,7 @@ export default function App() {
   const [gameState, setGameState] = useState<GameState>('idle');
   const [countdownValue, setCountdownValue] = useState<number>(3);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+  const [isAboutOpen, setIsAboutOpen] = useState<boolean>(false);
   const countdownTimeoutsRef = useRef<NodeJS.Timeout[]>([]);
 
   // Settings State with localStorage persistence
@@ -194,6 +196,7 @@ export default function App() {
             onSelectTheme={(themeId: ThemeId) => handleUpdateSettings({ themeId })}
             onSelectSkin={(skinId: BirdSkinId) => handleUpdateSettings({ skinId })}
             onStartGame={handleStartCountdown}
+            onOpenAbout={() => setIsAboutOpen(true)}
           />
         )}
 
@@ -205,6 +208,10 @@ export default function App() {
             gemsCount={stats.gemsCount}
             isNewBest={isNewBestScore}
             onRestart={handleStartCountdown}
+            onMainMenu={() => {
+              clearCountdownTimers();
+              setGameState('idle');
+            }}
             onOpenSettings={() => setIsSettingsOpen(true)}
           />
         )}
@@ -220,15 +227,28 @@ export default function App() {
                 Flight Suspended
               </span>
               <p className="text-xs text-slate-300">Press P or tap resume to continue</p>
-              <button
-                id="btn-resume-game"
-                type="button"
-                onClick={() => setGameState('playing')}
-                className="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm tracking-wide shadow-lg shadow-cyan-500/30 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
-              >
-                <Play className="w-4 h-4 fill-slate-950" />
-                <span>Resume</span>
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  id="btn-resume-game"
+                  type="button"
+                  onClick={() => setGameState('playing')}
+                  className="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm tracking-wide shadow-lg shadow-cyan-500/30 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+                >
+                  <Play className="w-4 h-4 fill-slate-950" />
+                  <span>Resume</span>
+                </button>
+                <button
+                  id="btn-pause-mainmenu"
+                  type="button"
+                  onClick={() => {
+                    clearCountdownTimers();
+                    setGameState('idle');
+                  }}
+                  className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs tracking-wide transition-all cursor-pointer"
+                >
+                  Main Menu
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -240,6 +260,13 @@ export default function App() {
           onClose={() => setIsSettingsOpen(false)}
           onUpdateSettings={handleUpdateSettings}
           onResetScore={handleResetScore}
+          onOpenAbout={() => setIsAboutOpen(true)}
+        />
+
+        {/* About Me Modal */}
+        <AboutModal
+          isOpen={isAboutOpen}
+          onClose={() => setIsAboutOpen(false)}
         />
       </div>
     </main>

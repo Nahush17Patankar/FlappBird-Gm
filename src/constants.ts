@@ -4,19 +4,19 @@ import { BirdSkinConfig, ThemeConfig } from './types';
 export const THEMES: Record<string, ThemeConfig> = {
   celestial: {
     id: 'celestial',
-    name: 'Astral Aurora',
-    description: 'Ethereal realm of glowing crystal monoliths & star dust',
-    bgImage: '/src/assets/images/celestial_sky_bg_1789550997540.jpg',
-    primaryColor: '#06b6d4', // cyan-500
-    accentColor: '#a855f7', // purple-500
-    crystalColor1: '#38bdf8', // sky-400
-    crystalColor2: '#c084fc', // purple-400
-    groundColor1: '#0f172a',
-    groundColor2: '#1e1b4b',
+    name: 'Floating Haven',
+    description: 'Ethereal floating sky islands with lush foliage & soaring peaks',
+    bgImage: '/src/assets/images/floating_islands_bg_1789569210965.jpg',
+    primaryColor: '#10b981', // emerald-500
+    accentColor: '#38bdf8', // sky-400
+    crystalColor1: '#34d399', // emerald-400
+    crystalColor2: '#38bdf8', // sky-400
+    groundColor1: '#064e3b', // emerald-950
+    groundColor2: '#022c22',
     pillarStyle: 'crystal',
     ambientParticles: {
-      count: 28,
-      color: 'rgba(168, 85, 247, 0.45)',
+      count: 24,
+      color: 'rgba(56, 189, 248, 0.45)',
       speed: 0.35,
     },
   },
@@ -40,20 +40,56 @@ export const THEMES: Record<string, ThemeConfig> = {
   },
   sunset: {
     id: 'sunset',
-    name: 'Gilded Solarpunk',
-    description: 'Ancient sunlit marble pillars & warm amber clouds',
-    bgImage: '/src/assets/images/golden_sunset_sky_1789551037015.jpg',
-    primaryColor: '#f59e0b', // amber-500
-    accentColor: '#fbbf24', // amber-400
-    crystalColor1: '#f59e0b', // amber-500
-    crystalColor2: '#fde68a', // amber-200
-    groundColor1: '#1c1917',
-    groundColor2: '#292524',
+    name: 'Sky Haven Sanctuary',
+    description: 'Vibrant mossy floating sky islands bathed in clear azure skies',
+    bgImage: '/src/assets/images/floating_haven_bg_1789569229987.jpg',
+    primaryColor: '#22c55e', // green-500
+    accentColor: '#38bdf8', // sky-400
+    crystalColor1: '#4ade80', // green-400
+    crystalColor2: '#67e8f9', // cyan-300
+    groundColor1: '#14532d', // green-900
+    groundColor2: '#052e16',
     pillarStyle: 'ancient',
     ambientParticles: {
-      count: 24,
-      color: 'rgba(251, 191, 36, 0.4)',
+      count: 22,
+      color: 'rgba(74, 222, 128, 0.4)',
       speed: 0.28,
+    },
+  },
+  jungle: {
+    id: 'jungle',
+    name: 'Mystic Night Canopy',
+    description: 'Enchanted nocturnal forest with glowing lanterns, hanging vines & totem pillars',
+    bgImage: '/src/assets/images/mystic_jungle_bg_1789569808131.jpg',
+    primaryColor: '#10b981', // emerald-500
+    accentColor: '#fbbf24', // amber-400
+    crystalColor1: '#34d399', // emerald-400
+    crystalColor2: '#f59e0b', // amber-500
+    groundColor1: '#064e3b', // emerald-950
+    groundColor2: '#022c22',
+    pillarStyle: 'ancient',
+    ambientParticles: {
+      count: 26,
+      color: 'rgba(251, 191, 36, 0.45)',
+      speed: 0.3,
+    },
+  },
+  desert: {
+    id: 'desert',
+    name: 'Sunbaked Canyon',
+    description: 'Sunlit desert canyon bluffs with saguaro cacti under brilliant blue skies',
+    bgImage: '/src/assets/images/desert_canyon_bg_1789569826011.jpg',
+    primaryColor: '#f59e0b', // amber-500
+    accentColor: '#0ea5e9', // sky-500
+    crystalColor1: '#fbbf24', // amber-400
+    crystalColor2: '#38bdf8', // sky-400
+    groundColor1: '#78350f', // amber-900
+    groundColor2: '#451a03',
+    pillarStyle: 'ancient',
+    ambientParticles: {
+      count: 20,
+      color: 'rgba(245, 158, 11, 0.35)',
+      speed: 0.25,
     },
   },
 };

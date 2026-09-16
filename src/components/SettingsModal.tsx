@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Volume2, Music, Shield, Sparkles, Flame, Check, Trash2, Download } from 'lucide-react';
+import { X, Volume2, Music, Shield, Sparkles, Flame, Check, Trash2, Download, User } from 'lucide-react';
 import { THEMES, BIRD_SKINS } from '../constants';
 import { GameMode, ThemeId, BirdSkinId, GameSettings } from '../types';
 import { PWAInstallButton } from './PWAInstallButton';
@@ -10,6 +10,7 @@ interface SettingsModalProps {
   onClose: () => void;
   onUpdateSettings: (newSettings: Partial<GameSettings>) => void;
   onResetScore: () => void;
+  onOpenAbout?: () => void;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -18,6 +19,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onClose,
   onUpdateSettings,
   onResetScore,
+  onOpenAbout,
 }) => {
   if (!isOpen) return null;
 
@@ -200,15 +202,28 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           </div>
         </div>
 
-        {/* 5. Install App as PWA */}
+        {/* 5. Install App as PWA & About Creator */}
         <div className="flex flex-col gap-2 pt-1 border-t border-slate-800">
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Install App</label>
+          <label className="text-xs font-bold uppercase tracking-wider text-slate-400">App & Creator</label>
           <div className="flex flex-col gap-2 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800">
             <div className="flex items-center gap-2 text-xs text-slate-300">
               <Download className="w-4 h-4 text-cyan-400 shrink-0" />
-              <span>Install to your home screen or desktop for full-screen offline gameplay.</span>
+              <span>Install to your phone or desktop for full-screen offline gameplay.</span>
             </div>
             <PWAInstallButton variant="full" />
+            {onOpenAbout && (
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onOpenAbout();
+                }}
+                className="w-full py-2 px-3 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700/60 text-slate-200 hover:text-cyan-300 text-xs font-medium flex items-center justify-center gap-2 transition-colors cursor-pointer"
+              >
+                <User className="w-3.5 h-3.5 text-cyan-400" />
+                <span>About Creator (Nahush Patankar)</span>
+              </button>
+            )}
           </div>
         </div>
 

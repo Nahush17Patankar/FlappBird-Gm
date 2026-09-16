@@ -25,19 +25,21 @@ export const GameHUD: React.FC<GameHUDProps> = ({
 }) => {
   return (
     <div className="absolute inset-x-0 top-0 p-4 pointer-events-none flex justify-between items-start select-none z-20">
-      {/* Top Left: Gems & Mode */}
+      {/* Top Left: Gems & Mode (shown during active gameplay or pause) */}
       <div className="flex flex-col gap-1.5 pointer-events-auto">
         {/* Gems Pill */}
-        <div
-          id="hud-gems-counter"
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/70 border border-amber-500/40 backdrop-blur-md shadow-lg shadow-amber-950/20 text-amber-300 text-xs font-semibold tracking-wide"
-        >
-          <Gem className="w-3.5 h-3.5 text-amber-400 fill-amber-400/30 animate-pulse" />
-          <span>{gemsCount}</span>
-        </div>
+        {gameState !== 'idle' && (
+          <div
+            id="hud-gems-counter"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/70 border border-amber-500/40 backdrop-blur-md shadow-lg shadow-amber-950/20 text-amber-300 text-xs font-semibold tracking-wide"
+          >
+            <Gem className="w-3.5 h-3.5 text-amber-400 fill-amber-400/30 animate-pulse" />
+            <span>{gemsCount}</span>
+          </div>
+        )}
 
         {/* Mode Tag */}
-        {gameMode !== 'classic' && (
+        {gameState !== 'idle' && gameMode !== 'classic' && (
           <div
             id="hud-gamemode-tag"
             className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider backdrop-blur-md border ${
@@ -51,15 +53,17 @@ export const GameHUD: React.FC<GameHUDProps> = ({
         )}
       </div>
 
-      {/* Top Center: Main Score (Prominent during active game) */}
+      {/* Top Center: Main Score (Prominent during active game, hidden when idle) */}
       <div className="flex flex-col items-center pointer-events-none">
-        <span
-          id="hud-main-score"
-          className="text-4xl sm:text-5xl font-black text-white drop-shadow-[0_4px_16px_rgba(56,189,248,0.6)] tracking-tight"
-          style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8), 0 0 20px rgba(56,189,248,0.5)' }}
-        >
-          {score}
-        </span>
+        {gameState !== 'idle' && (
+          <span
+            id="hud-main-score"
+            className="text-4xl sm:text-5xl font-black text-white drop-shadow-[0_4px_16px_rgba(56,189,248,0.6)] tracking-tight"
+            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8), 0 0 20px rgba(56,189,248,0.5)' }}
+          >
+            {score}
+          </span>
+        )}
       </div>
 
       {/* Top Right: Controls */}

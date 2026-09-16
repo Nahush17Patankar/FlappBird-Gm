@@ -1,5 +1,5 @@
 import React from 'react';
-import { RotateCcw, Trophy, Sparkles, Gem, Award, Palette } from 'lucide-react';
+import { RotateCcw, Trophy, Sparkles, Gem, Award, Palette, Home } from 'lucide-react';
 import { MEDALS } from '../constants';
 
 interface GameOverModalProps {
@@ -8,6 +8,7 @@ interface GameOverModalProps {
   gemsCount: number;
   isNewBest: boolean;
   onRestart: () => void;
+  onMainMenu: () => void;
   onOpenSettings: () => void;
 }
 
@@ -17,6 +18,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
   gemsCount,
   isNewBest,
   onRestart,
+  onMainMenu,
   onOpenSettings,
 }) => {
   // Determine medal
@@ -95,13 +97,26 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
           </button>
 
           <button
+            id="btn-gameover-mainmenu"
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onMainMenu();
+            }}
+            className="w-full py-2.5 px-4 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/60 text-slate-200 hover:text-white font-medium text-xs tracking-wide transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Home className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Main Menu</span>
+          </button>
+
+          <button
             id="btn-gameover-customize"
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               onOpenSettings();
             }}
-            className="w-full py-2.5 px-4 rounded-xl bg-slate-800/70 hover:bg-slate-800 border border-slate-700/60 text-slate-300 hover:text-white font-medium text-xs tracking-wide transition-all flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-2 px-4 rounded-xl bg-slate-900/60 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-slate-200 font-medium text-xs tracking-wide transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <Palette className="w-3.5 h-3.5 text-purple-400" />
             <span>Switch Realm & Character</span>
