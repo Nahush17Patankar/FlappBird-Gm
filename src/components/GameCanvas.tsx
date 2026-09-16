@@ -325,7 +325,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
         e.preventDefault();
         handleFlap();
       }}
-      className="relative w-full h-full flex items-center justify-center overflow-hidden select-none cursor-pointer bg-transparent touch-none"
+      className="relative z-10 w-full h-full flex items-center justify-center overflow-hidden select-none cursor-pointer bg-transparent touch-none"
     >
       <canvas
         ref={canvasRef}

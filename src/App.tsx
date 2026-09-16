@@ -147,26 +147,19 @@ export default function App() {
   const currentTheme = THEMES[settings.themeId] || THEMES.celestial;
 
   return (
-    <main className="relative w-screen h-screen overflow-hidden bg-slate-950 flex items-center justify-center font-sans antialiased text-slate-100">
+    <main className="relative isolate w-screen h-screen overflow-hidden bg-slate-950 flex items-center justify-center font-sans antialiased text-slate-100">
       {/* Outer ambient gradient glow */}
       <div className="absolute inset-0 bg-radial from-slate-900/60 via-slate-950/90 to-slate-950 pointer-events-none" />
 
       {/* Main Game Card Shell - Fully responsive on mobile (filling viewport), beautifully framed on desktop */}
       <div
         id="main-game-card-shell"
-        className="relative w-full h-full max-w-none max-h-none sm:max-w-[480px] sm:max-h-[820px] sm:h-[94vh] sm:rounded-3xl sm:border sm:border-slate-800/80 shadow-2xl shadow-indigo-950/50 flex flex-col items-center justify-center overflow-hidden bg-slate-950"
+        className="relative isolate w-full h-full max-w-none max-h-none sm:max-w-[480px] sm:max-h-[820px] sm:h-[94vh] sm:rounded-3xl sm:border sm:border-slate-800/80 shadow-2xl shadow-indigo-950/50 flex flex-col items-center justify-center overflow-hidden bg-slate-950"
       >
-        {/* Responsive Theme Background Layer for Viewport & Menu */}
-        <div
-          id="app-theme-background"
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none transition-[background-image] duration-300"
-          style={{
-            backgroundImage: `url(${currentTheme.bgImage})`,
-          }}
-        >
-          {/* Atmospheric gradient overlay for optimal UI legibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/25 via-transparent to-slate-950/55" />
-        </div>
+        {/* Plain dark backdrop for the card frame — the canvas itself (via GameRenderer)
+            already draws the theme background with correct, non-stretched aspect-ratio cropping.
+            No image here to avoid a second, mismatched copy showing through/around the canvas. */}
+        <div id="app-theme-background" className="absolute inset-0 z-0 pointer-events-none bg-slate-950" />
 
         {/* Game Canvas Container */}
         <GameCanvas

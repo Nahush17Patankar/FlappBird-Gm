@@ -1,12 +1,19 @@
 import { BirdSkinConfig, ThemeConfig } from './types';
 
+// Image imports — Vite will bundle & hash these correctly for both dev and production builds
+import floatingIslandsBg from './assets/images/floating_islands_bg_1789569210965.jpg';
+import cyberNeonBg from './assets/images/cyber_neon_sky_1789551022191.jpg';
+import floatingHavenBg from './assets/images/floating_haven_bg_1789569229987.jpg';
+import mysticJungleBg from './assets/images/mystic_jungle_bg_1789569808131.jpg';
+import desertCanyonBg from './assets/images/desert_canyon_bg_1789569826011.jpg';
+
 // Asset background paths
 export const THEMES: Record<string, ThemeConfig> = {
   celestial: {
     id: 'celestial',
     name: 'Floating Haven',
     description: 'Ethereal floating sky islands with lush foliage & soaring peaks',
-    bgImage: '/src/assets/images/floating_islands_bg_1789569210965.jpg',
+    bgImage: floatingIslandsBg,
     primaryColor: '#10b981', // emerald-500
     accentColor: '#38bdf8', // sky-400
     crystalColor1: '#34d399', // emerald-400
@@ -24,7 +31,7 @@ export const THEMES: Record<string, ThemeConfig> = {
     id: 'cyber',
     name: 'Neon Cyberpunk',
     description: 'Futuristic synthwave grid with laser towers & holograms',
-    bgImage: '/src/assets/images/cyber_neon_sky_1789551022191.jpg',
+    bgImage: cyberNeonBg,
     primaryColor: '#f43f5e', // rose-500
     accentColor: '#06b6d4', // cyan-500
     crystalColor1: '#ec4899', // pink-500
@@ -42,7 +49,7 @@ export const THEMES: Record<string, ThemeConfig> = {
     id: 'sunset',
     name: 'Sky Haven Sanctuary',
     description: 'Vibrant mossy floating sky islands bathed in clear azure skies',
-    bgImage: '/src/assets/images/floating_haven_bg_1789569229987.jpg',
+    bgImage: floatingHavenBg,
     primaryColor: '#22c55e', // green-500
     accentColor: '#38bdf8', // sky-400
     crystalColor1: '#4ade80', // green-400
@@ -60,7 +67,7 @@ export const THEMES: Record<string, ThemeConfig> = {
     id: 'jungle',
     name: 'Mystic Night Canopy',
     description: 'Enchanted nocturnal forest with glowing lanterns, hanging vines & totem pillars',
-    bgImage: '/src/assets/images/mystic_jungle_bg_1789569808131.jpg',
+    bgImage: mysticJungleBg,
     primaryColor: '#10b981', // emerald-500
     accentColor: '#fbbf24', // amber-400
     crystalColor1: '#34d399', // emerald-400
@@ -78,7 +85,7 @@ export const THEMES: Record<string, ThemeConfig> = {
     id: 'desert',
     name: 'Sunbaked Canyon',
     description: 'Sunlit desert canyon bluffs with saguaro cacti under brilliant blue skies',
-    bgImage: '/src/assets/images/desert_canyon_bg_1789569826011.jpg',
+    bgImage: desertCanyonBg,
     primaryColor: '#f59e0b', // amber-500
     accentColor: '#0ea5e9', // sky-500
     crystalColor1: '#fbbf24', // amber-400
