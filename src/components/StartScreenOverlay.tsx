@@ -2,6 +2,7 @@ import React from 'react';
 import { Play, Sparkles, Trophy, Shield, Flame, Compass } from 'lucide-react';
 import { THEMES, BIRD_SKINS } from '../constants';
 import { GameMode, ThemeId, BirdSkinId } from '../types';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface StartScreenOverlayProps {
   bestScore: number;
@@ -31,25 +32,29 @@ export const StartScreenOverlay: React.FC<StartScreenOverlayProps> = ({
       id="start-screen-overlay"
       className="absolute inset-0 flex flex-col items-center justify-between p-6 z-20 pointer-events-none select-none"
     >
-      {/* Top Banner / Best Score */}
-      <div className="w-full flex justify-between items-center pointer-events-auto">
-        <div
-          id="badge-best-score"
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/60 backdrop-blur-md text-xs font-semibold text-slate-300 shadow-md"
-        >
-          <Trophy className="w-3.5 h-3.5 text-amber-400" />
-          <span>High Score: <strong className="text-white">{bestScore}</strong></span>
+      {/* Top Banner / Best Score & PWA Install Button */}
+      <div className="w-full flex justify-between items-center pointer-events-auto gap-2">
+        <div className="flex items-center gap-2">
+          <div
+            id="badge-best-score"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/60 backdrop-blur-md text-xs font-semibold text-slate-300 shadow-md"
+          >
+            <Trophy className="w-3.5 h-3.5 text-amber-400" />
+            <span>High: <strong className="text-white">{bestScore}</strong></span>
+          </div>
+
+          {totalGems > 0 && (
+            <div
+              id="badge-total-gems"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-amber-500/30 backdrop-blur-md text-xs font-semibold text-amber-300 shadow-md"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>{totalGems}</span>
+            </div>
+          )}
         </div>
 
-        {totalGems > 0 && (
-          <div
-            id="badge-total-gems"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-amber-500/30 backdrop-blur-md text-xs font-semibold text-amber-300 shadow-md"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span>{totalGems} Gems</span>
-          </div>
-        )}
+        <PWAInstallButton variant="compact" />
       </div>
 
       {/* Middle: Title & Tap to Start Call-to-Action */}

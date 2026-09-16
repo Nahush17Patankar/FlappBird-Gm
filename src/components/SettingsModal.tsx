@@ -1,7 +1,8 @@
 import React from 'react';
-import { X, Volume2, Music, Shield, Sparkles, Flame, Check, Trash2 } from 'lucide-react';
+import { X, Volume2, Music, Shield, Sparkles, Flame, Check, Trash2, Download } from 'lucide-react';
 import { THEMES, BIRD_SKINS } from '../constants';
 import { GameMode, ThemeId, BirdSkinId, GameSettings } from '../types';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface SettingsModalProps {
   settings: GameSettings;
@@ -196,6 +197,18 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               onChange={(e) => onUpdateSettings({ ambientMusicEnabled: e.target.checked })}
               className="w-4 h-4 accent-purple-500 rounded cursor-pointer"
             />
+          </div>
+        </div>
+
+        {/* 5. Install App as PWA */}
+        <div className="flex flex-col gap-2 pt-1 border-t border-slate-800">
+          <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Install App</label>
+          <div className="flex flex-col gap-2 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800">
+            <div className="flex items-center gap-2 text-xs text-slate-300">
+              <Download className="w-4 h-4 text-cyan-400 shrink-0" />
+              <span>Install to your home screen or desktop for full-screen offline gameplay.</span>
+            </div>
+            <PWAInstallButton variant="full" />
           </div>
         </div>
 

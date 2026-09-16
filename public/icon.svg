@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+    <linearGradient id="birdGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="30%" stop-color="#38bdf8" />
+      <stop offset="70%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="60%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#f43f5e" />
+    </linearGradient>
+    <radialGradient id="auraGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.4" />
+      <stop offset="70%" stop-color="#818cf8" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+    </radialGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.25" stroke-dasharray="8 12" />
+
+  <!-- Ambient Glow -->
+  <circle cx="256" cy="256" r="180" fill="url(#auraGlow)" />
+
+  <!-- Crystal Spires in Background -->
+  <polygon points="120,440 145,280 170,440" fill="#1e293b" opacity="0.6" />
+  <polygon points="360,440 385,260 410,440" fill="#1e293b" opacity="0.6" />
+
+  <!-- Glowing Flight Trail -->
+  <circle cx="160" cy="290" r="14" fill="#38bdf8" opacity="0.3" filter="url(#glow)" />
+  <circle cx="190" cy="275" r="18" fill="#818cf8" opacity="0.5" filter="url(#glow)" />
+
+  <!-- Bird Body -->
+  <g transform="translate(240, 245) rotate(-8)">
+    <!-- Back Wing -->
+    <path d="M -30 -10 C -70 -70 -20 -90 10 -40 Z" fill="url(#wingGrad)" opacity="0.8" />
+
+    <!-- Main Body -->
+    <ellipse cx="10" cy="10" rx="75" ry="55" fill="url(#birdGrad)" filter="url(#glow)" />
+
+    <!-- Belly Highlight -->
+    <ellipse cx="-5" cy="25" rx="40" ry="20" fill="#ffffff" opacity="0.35" />
+
+    <!-- Front Wing -->
+    <path d="M -10 15 C -60 75 10 90 25 35 Z" fill="url(#wingGrad)" />
+
+    <!-- Head Crest / Halo -->
+    <path d="M 40 -35 Q 65 -55 80 -40 Q 65 -25 50 -20 Z" fill="#facc15" />
+
+    <!-- Beak -->
+    <polygon points="75,-5 125,12 72,26" fill="#f59e0b" />
+    <polygon points="75,3 125,12 72,16" fill="#fbbf24" />
+
+    <!-- Eye Outer -->
+    <circle cx="52" cy="-10" r="14" fill="#ffffff" />
+    <!-- Pupil -->
+    <circle cx="56" cy="-10" r="7" fill="#0f172a" />
+    <!-- Glint -->
+    <circle cx="59" cy="-13" r="3" fill="#ffffff" />
+  </g>
+
+  <!-- Floating Sparkles -->
+  <polygon points="390,140 395,155 410,160 395,165 390,180 385,165 370,160 385,155" fill="#38bdf8" />
+  <polygon points="120,160 123,170 133,173 123,176 120,186 117,176 107,173 117,170" fill="#ec4899" />
+</svg>
