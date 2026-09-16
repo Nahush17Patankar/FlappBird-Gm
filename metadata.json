@@ -1,0 +1,6 @@
+{
+  "name": "Flappy Bird Game",
+  "description": "A Flappy Bird style arcade game featuring unique procedural graphics, celestial themes, fluid physics, and synth audio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
